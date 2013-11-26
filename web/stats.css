@@ -1,6 +1,9 @@
 .template {
     display: none !important;
 }
+* {
+  cursor: default;
+}
 body {
     background-color: #333;
     color: #eee;
@@ -25,6 +28,7 @@ section {
     float: left;
     margin: 0;
     width: 130px;
+    font-size: 12px;
 }
 .stat-name {
     display: inline-block;
