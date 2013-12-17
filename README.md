@@ -50,3 +50,7 @@ Live demo
 ---------
 
 Ok, coming soon.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/joewalnes/web-vmstats/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
