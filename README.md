@@ -44,13 +44,3 @@ Running
 -------
 
 See `./run` script for instructions.
-
-
-Live demo
----------
-
-The team at [runnable.com](http://runnable.com/) have created an amazing [live demo](http://runnable.com/UqkgWZky2isJAAIF/web-vm-stats-for-shell-bash-and-websocketd). Hit 'Run'.
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/joewalnes/web-vmstats/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
