@@ -10,15 +10,20 @@
 <script src="js/chroma.min.js"></script>
 <script src="stats.js"></script>
 
-<main id="charts">
-  <section class="chart template">
-    <h2 class="title"></h2>
-    <canvas width="600" height="80"></canvas>
-    <ul class="stats">
-        <li class="stat template">
-            <span class="stat-name"></span>
-            <span class="stat-value"></span>
-        </li>
-    </ul>
+<main id="servers">
+  <section class="server template">
+    <h2 class="hostname"></h2>
+    <section class="charts">
+      <section class="chart template">
+        <h2 class="title"></h2>
+        <canvas width="600" height="80"></canvas>
+        <ul class="stats">
+            <li class="stat template">
+                <span class="stat-name"></span>
+                <span class="stat-value"></span>
+            </li>
+        </ul>
+      </section>
+    </section>
   </section>
 </main>
