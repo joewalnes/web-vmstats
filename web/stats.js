@@ -44,10 +44,12 @@ ServerStats.prototype.streamStats = function(host) {
     ws.onopen = function() {
         console.log('connect');
         lineCount = 0;
+        self.server.addClass('connected');
     };
 
     ws.onclose = function() {
         console.log('disconnect');
+        self.server.removeClass('connected');
     };
 
     ws.onmessage = function(e) {

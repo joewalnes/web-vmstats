@@ -16,7 +16,10 @@ h2 {
 .server {
   float: left;
   margin-left: 10px;
+  opacity: 0.1;
 }
+.server.connected {
+  opacity: 1;
 }
 .stats {
     margin: 0;
