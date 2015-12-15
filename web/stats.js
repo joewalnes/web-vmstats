@@ -1,5 +1,3 @@
-var allTimeSeries = {};
-var allValueLabels = {};
 var descriptions = {
     'Processes': {
         'r': 'Number of processes waiting for run time',
@@ -31,9 +29,15 @@ var descriptions = {
     }
 }
 
-function streamStats() {
+function ServerStats(host) {
+    this.host = host;
+    this.allTimeSeries = {};
+    this.allValueLabels = {};
+}
 
-    var ws = new ReconnectingWebSocket('ws://' + location.host + '/');
+ServerStats.prototype.streamStats = function(host) {
+    var self = this;
+    var ws = new ReconnectingWebSocket('ws://' + this.host + '/');
     var lineCount;
     var colHeadings;
 
@@ -61,14 +65,18 @@ function streamStats() {
                 for (var i = 0; i < colHeadings.length; i++) {
                     stats[colHeadings[i]] = parseInt(colValues[i]);
                 }
-                receiveStats(stats);
+                self.receiveStats(stats);
         }
     };
 }
 
-function initCharts() {
+ServerStats.prototype.initCharts = function() {
+    var self = this;
+    self.server = $('.server.template').clone().removeClass('template').appendTo('#servers');
+    self.server.find('.hostname').text(this.host.split(/:/)[0]);
+
     Object.each(descriptions, function(sectionName, values) {
-        var section = $('.chart.template').clone().removeClass('template').appendTo('#charts');
+        var section = self.server.find('.chart.template').clone().removeClass('template').appendTo(self.server.find('.charts'));
 
         section.find('.title').text(sectionName);
 
@@ -97,27 +105,36 @@ function initCharts() {
                 fillStyle: chroma(color).darken().alpha(0.5).css(),
                 lineWidth: 3
             });
-            allTimeSeries[name] = timeSeries;
+            self.allTimeSeries[name] = timeSeries;
 
             var statLine = section.find('.stat.template').clone().removeClass('template').appendTo(section.find('.stats'));
             statLine.attr('title', valueDescription).css('color', color);
             statLine.find('.stat-name').text(name);
-            allValueLabels[name] = statLine.find('.stat-value');
+            self.allValueLabels[name] = statLine.find('.stat-value');
         });
     });
 }
 
-function receiveStats(stats) {
+ServerStats.prototype.receiveStats = function(stats) {
+    var self = this;
     Object.each(stats, function(name, value) {
-        var timeSeries = allTimeSeries[name];
+        var timeSeries = self.allTimeSeries[name];
         if (timeSeries) {
             timeSeries.append(Date.now(), value);
-            allValueLabels[name].text(value);
+            self.allValueLabels[name].text(value);
         }
     });
 }
 
 $(function() {
-    initCharts();
-    streamStats();
+    var hosts = [
+      location.host
+    ];
+
+    Object.each(hosts, function(i, host) {
+      var stats = new ServerStats(host);
+      stats.initCharts();
+      stats.streamStats();
+    });
+
 });

@@ -13,12 +13,10 @@ h2 {
     margin: 40px 0 0 0;
     font-weight: 300;
 }
-main {
-    width: 600px;
-    margin: auto;
+.server {
+  float: left;
+  margin-left: 10px;
 }
-section {
-    clear: left;
 }
 .stats {
     margin: 0;
