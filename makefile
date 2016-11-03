@@ -10,7 +10,7 @@ all:
 		x86_64) \
 			export ARCH="amd64"; \
 			;; \
-		i386) \
+		i?86|i.86) \
 			export ARCH="386"; \
 			;; \
 		arm*) \
