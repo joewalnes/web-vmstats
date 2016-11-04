@@ -1,6 +1,9 @@
 #!/bin/sh
 
-# Download websocketd for your platform from
-# https://github.com/joewalnes/websocketd/wiki/Download-and-install
+echo "$PATH" | tr : \\n | grep -iE "^\.$" || export PATH="$PATH:."
 
-./websocketd --port=9231 --staticdir=web /usr/bin/vmstat -n 1
+test -z "$(which websocketd)" && make
+
+websocketd --port=9231 --staticdir=web /usr/bin/vmstat -n 1
+
+exit
